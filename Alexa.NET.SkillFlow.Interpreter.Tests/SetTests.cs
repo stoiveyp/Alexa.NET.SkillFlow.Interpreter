@@ -22,13 +22,7 @@ namespace Alexa.NET.SkillFlow.Tests
             var context = new SkillFlowInterpretationContext(new SkillFlowInterpretationOptions());
             context.Components.Push(new SceneInstructions());
             Assert.True(interpreter.CanInterpret("set test as testSlot", context));
-        }
-
-        [Fact]
-        public void CorrectlyIdentifiesFalseText()
-        {
-            var interpreter = new SetInterpreter();
-            Assert.False(interpreter.CanInterpret("setting test to test", new SkillFlowInterpretationContext(new SkillFlowInterpretationOptions())));
+            var test = interpreter.Interpret("set test as testSlot",context);
         }
 
         [Fact]

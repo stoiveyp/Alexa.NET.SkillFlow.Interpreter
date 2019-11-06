@@ -226,7 +226,7 @@ namespace Alexa.NET.SkillFlow.Interpreter
 
             if (context.CurrentWord.Length > 0)
             {
-                context.Push(new LiteralValue(context.CurrentWord));
+                context.Push(CorrectLiteral(context.CurrentWord));
             }
         }
 
@@ -287,11 +287,40 @@ namespace Alexa.NET.SkillFlow.Interpreter
                 default:
                     if (context.CurrentWord.Trim().Length > 0)
                     {
-                        context.Push(new LiteralValue(context.CurrentWord.Trim()));
+                        context.Push(CorrectLiteral(context.CurrentWord.Trim()));
                         context.MoveToCurrent();
                     }
                     break;
             }
+        }
+
+        private static Value CorrectLiteral(string candidate)
+        {
+            if (string.IsNullOrWhiteSpace(candidate))
+            {
+                return new LiteralValue(candidate);
+            }
+
+            if (int.TryParse(candidate, out int intResult))
+            {
+                return new LiteralValue(intResult);
+            }
+
+            if (bool.TryParse(candidate, out bool boolResult))
+            {
+                return new LiteralValue(boolResult);
+            }
+
+            if (candidate[0] == '\'' || candidate[0] == '"')
+            {
+                var match = candidate[0];
+                if (candidate.Last() == match)
+                {
+                    return new LiteralValue(candidate.Substring(1,candidate.Length-2));
+                }
+            }
+
+            return candidate.All(char.IsLetterOrDigit) ? (Value)new Variable(candidate) : (Value)new LiteralValue(candidate);
         }
 
         static readonly char?[] breakers = { '(', ')', ' ', '<', '>', '=', '!', '|', '&' };

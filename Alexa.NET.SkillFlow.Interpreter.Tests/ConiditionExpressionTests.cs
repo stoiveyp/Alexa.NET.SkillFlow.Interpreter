@@ -21,7 +21,7 @@ namespace Alexa.NET.SkillFlow.Tests
             var values = context.Values.ToList();
             Assert.IsType<LiteralValue>(values[0]);
             Assert.IsType<Equal>(values[1]);
-            Assert.IsType<LiteralValue>(values[2]);
+            Assert.IsType<Variable>(values[2]);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Alexa.NET.SkillFlow.Tests
             Assert.Equal(7, context.Values.Count);
 
             var values = context.Values.Reverse().ToList();
-            Assert.IsType<LiteralValue>(values[0]);
+            Assert.IsType<Variable>(values[0]);
             Assert.IsType<Equal>(values[1]);
             Assert.IsType<LiteralValue>(values[2]);
             Assert.IsType<And>(values[3]);
@@ -49,7 +49,7 @@ namespace Alexa.NET.SkillFlow.Tests
             Assert.Equal(7, context.Values.Count);
 
             var values = context.Values.Reverse().ToList();
-            Assert.IsType<LiteralValue>(values[0]);
+            Assert.IsType<Variable>(values[0]);
             Assert.IsType<Equal>(values[1]);
             Assert.IsType<LiteralValue>(values[2]);
             Assert.IsType<And>(values[3]);

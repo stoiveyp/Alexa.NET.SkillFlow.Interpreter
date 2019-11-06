@@ -39,6 +39,20 @@ namespace Alexa.NET.SkillFlow.Tests
         }
 
         [Fact]
+        public async Task VariableAndStringCorrectly()
+        {
+            var interpreter = new SkillFlowInterpreter(new SkillFlowInterpretationOptions { LineEnding = "\n" });
+            var result = await interpreter.Interpret("@test\n\t*then\n\t\tif bottles == 'mage' {\n\t\t\tflag test\n\t\t\t}");
+            var instruction = Assert.Single(result.Scenes.First().Value.Instructions.Instructions);
+            var ifInstruction = Assert.IsType<If>(instruction);
+            var equal = Assert.IsType<Equal>(ifInstruction.Condition);
+            var variable = Assert.IsType<Variable>(equal.Left);
+            var text = Assert.IsType<LiteralValue>(equal.Right);
+            Assert.Equal("bottles", variable.Name);
+            Assert.Equal("mage", text.Value);
+        }
+
+        [Fact]
         public async Task CreatesConditionCorrectly()
         {
             var interpreter = new SkillFlowInterpreter(new SkillFlowInterpretationOptions{LineEnding = "\n"});
@@ -46,8 +60,8 @@ namespace Alexa.NET.SkillFlow.Tests
             var instruction = Assert.Single(result.Scenes.First().Value.Instructions.Instructions);
             var ifInstruction = Assert.IsType<If>(instruction);
             var not = Assert.IsType<Not>(ifInstruction.Condition);
-            var literal = Assert.IsType<LiteralValue>(not.Condition);
-            Assert.Equal("test",literal.Value);
+            var literal = Assert.IsType<Variable>(not.Condition);
+            Assert.Equal("test",literal.Name);
         }
     }
 }

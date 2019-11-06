@@ -22,10 +22,10 @@ namespace Alexa.NET.SkillFlow.Tests
             var equal = Assert.IsType<Equal>(result);
 
             var left = Assert.IsType<LiteralValue>(equal.Left);
-            Assert.Equal("3",left.Value);
+            Assert.Equal(3,left.Value);
 
             var right = Assert.IsType<LiteralValue>(equal.Right);
-            Assert.Equal("5", right.Value);
+            Assert.Equal(5, right.Value);
         }
 
         [Fact]
