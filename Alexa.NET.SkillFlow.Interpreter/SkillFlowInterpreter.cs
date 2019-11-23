@@ -117,6 +117,10 @@ namespace Alexa.NET.SkillFlow
                 {
                     used = buffer.GetPosition(osb.Length + (hitLineBreak ? context.Options.LineEnding.Length : 0));
                     reader.AdvanceTo(used, examined);
+                    while (context.CurrentComponent is TextLine || context.CurrentComponent is Text)
+                    {
+                        context.Components.Pop();
+                    }
                     continue;
                 }
 

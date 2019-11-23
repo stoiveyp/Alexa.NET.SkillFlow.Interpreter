@@ -30,6 +30,8 @@
 		hear great {
 			-> end
 		}
+	*recap
+	    Morning's done so what do you want to do?
 
 @do not go on a hike
 	*say
@@ -192,6 +194,8 @@
 @resume
 	*say
 		Welcome back to your hiking story. Would you like to pick up where you last left off?
+		||
+		Yo yo, we picking up from where you dropped off?
 	*then
 		hear yes {
             // Tell the framework to pick up where they last left off
@@ -200,6 +204,9 @@
 		hear no {
 			>> RESTART
 		}
+		hear * {
+                -> help
+            }
 
 // SPECIAL SCENE: @pause is a special scene that plays before the skill pauses
 @pause

@@ -10,8 +10,8 @@
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.SkillFlow.Interpreter</RepositoryUrl>
     <PackageTags>Alexa, SkillFlow</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
-    <PackageReleaseNotes>Fix literal and variable parsing</PackageReleaseNotes>
+    <Version>1.0.2</Version>
+    <PackageReleaseNotes>Correct incorrect parsing of blank lines between scenes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

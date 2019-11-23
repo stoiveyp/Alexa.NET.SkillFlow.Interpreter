@@ -15,7 +15,7 @@ namespace Alexa.NET.SkillFlow.Tests
             var interpreter = new MultiLineInterpreter();
             var context = new SkillFlowInterpretationContext(new SkillFlowInterpretationOptions());
             context.Components.Push(new Text("nocare"));
-            Assert.True(interpreter.CanInterpret(string.Empty, context));
+            Assert.True(interpreter.CanInterpret("stuff", context));
         }
 
 
